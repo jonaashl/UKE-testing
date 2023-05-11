@@ -15,7 +15,7 @@ namespace UKE_xunit
         public RomanNumeralConverterTest()
         {
             var options = new DbContextOptionsBuilder<NumeralDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDatabase") // Unique name for each test class
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
                 .Options;
 
             _context = new NumeralDbContext(options);
@@ -27,7 +27,7 @@ namespace UKE_xunit
         {
             var model = new RomanNumeralModel { Numeral = string.Empty };
 
-            var result = _controller.Convert(model);
+            var result = _controller.ConvertToNumber(model);
 
             Assert.IsType<BadRequestObjectResult>(result);
         }
@@ -37,7 +37,7 @@ namespace UKE_xunit
         {
             var model = new RomanNumeralModel { Numeral = "O" };
 
-            var result = _controller.Convert(model);
+            var result = _controller.ConvertToNumber(model);
 
             Assert.IsType<BadRequestObjectResult>(result);
         }
@@ -47,7 +47,7 @@ namespace UKE_xunit
         {
             var model = new RomanNumeralModel { Numeral = "III" };
 
-            var result = _controller.Convert(model);
+            var result = _controller.ConvertToNumber(model);
 
             Assert.IsType<OkObjectResult>(result);
 
@@ -64,7 +64,7 @@ namespace UKE_xunit
         {
             var model = new RomanNumeralModel { Numeral = numeral };
 
-            var result = _controller.Convert(model);
+            var result = _controller.ConvertToNumber(model);
 
             Assert.IsType<OkObjectResult>(result);
 
